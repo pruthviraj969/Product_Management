@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  body { @apply bg-brand-bg text-brand-text font-mono min-h-screen; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-brand-surface; }
+  ::-webkit-scrollbar-thumb { @apply bg-brand-border rounded; }
+  select option { @apply bg-brand-surface; }
+}
+
+@layer components {
+  .input-field {
+    @apply bg-brand-bg border border-brand-border text-brand-text
+           px-3 py-2.5 font-mono text-sm outline-none w-full transition-all duration-200
+           focus:border-brand-lime focus:ring-2 focus:ring-brand-lime/10
+           placeholder:text-brand-muted;
+  }
+  .btn-lime {
+    @apply bg-brand-lime text-brand-bg font-display tracking-widest
+           transition-all duration-200 cursor-pointer
+           hover:bg-lime-300 hover:shadow-[0_0_24px_rgba(163,230,53,0.4)] hover:-translate-y-px
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-ghost {
+    @apply border border-brand-border text-brand-muted font-mono text-sm
+           tracking-wider transition-all duration-200 cursor-pointer
+           hover:border-brand-text hover:text-brand-text;
+  }
+  .card-shine {
+    @apply transition-all duration-300 hover:-translate-y-1
+           hover:shadow-[0_0_0_1px_rgba(163,230,53,0.2),0_20px_40px_rgba(0,0,0,0.5)];
+  }
+  .stat-glow {
+    @apply bg-brand-card border border-brand-border p-4 flex-1 relative overflow-hidden;
+  }
+  .stat-glow::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(135deg, rgba(163,230,53,0.04) 0%, transparent 60%);
+  }
+  .overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+    background: rgba(8,12,16,0.88);
+    backdrop-filter: blur(6px);
+  }
+}
