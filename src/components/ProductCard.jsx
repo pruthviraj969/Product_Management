@@ -1,4 +1,4 @@
-export default function ProductCard({ product, onEdit, onDelete, isNew }) {
+export default function ProductCard({ product, onEdit, onDelete, onView, isNew }) {
   return (
     <div className={`bg-brand-card border flex flex-col card-shine animate-fadeUp relative overflow-hidden
       ${isNew ? 'border-brand-lime/50' : 'border-brand-border'}`}>
@@ -8,7 +8,8 @@ export default function ProductCard({ product, onEdit, onDelete, isNew }) {
                          text-[9px] font-bold px-2 py-0.5 tracking-[0.18em] z-10">NEW</span>
       )}
 
-      <div className="bg-white h-44 flex items-center justify-center p-4 relative flex-shrink-0">
+      <button type="button" onClick={() => onView(product)}
+        className="bg-white h-44 flex items-center justify-center p-4 relative flex-shrink-0 w-full">
         <img src={product.image} alt={product.title}
           className="max-h-36 max-w-full object-contain transition-transform duration-300 hover:scale-105"
           onError={e => e.target.src = 'https://via.placeholder.com/150'} />
@@ -16,9 +17,9 @@ export default function ProductCard({ product, onEdit, onDelete, isNew }) {
                          font-mono text-[9px] px-2 py-0.5 uppercase tracking-wider">
           {product.category}
         </span>
-      </div>
+      </button>
 
-      <div className="p-4 flex flex-col gap-2 flex-1">
+      <button type="button" onClick={() => onView(product)} className="p-4 flex flex-col gap-2 flex-1 text-left">
         <p className="font-mono text-sm text-brand-text leading-snug line-clamp-2 font-medium">{product.title}</p>
         <p className="font-mono text-xs text-brand-muted leading-relaxed line-clamp-2 flex-1">{product.description}</p>
         <div className="flex items-center justify-between pt-3 mt-1 border-t border-brand-border">
@@ -33,7 +34,7 @@ export default function ProductCard({ product, onEdit, onDelete, isNew }) {
             </div>
           )}
         </div>
-      </div>
+      </button>
 
       <div className="flex border-t border-brand-border">
         <button onClick={() => onEdit(product)}

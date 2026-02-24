@@ -7,9 +7,11 @@ import {
 } from '../store/slices/productsSlice';
 import ProductCard   from '../components/ProductCard';
 import ProductModal  from '../components/ProductModal';
+import ProductDetailsModal from '../components/ProductDetailsModal';
 import ConfirmDelete from '../components/ConfirmDelete';
 import StatCard      from '../components/StatCard';
 import Toast         from '../components/Toast';
+import Footer from '../components/Footer';
 
 export default function Dashboard() {
   const dispatch         = useDispatch();
@@ -40,6 +42,7 @@ export default function Dashboard() {
     : '$0.00';
 
   return (
+    <> 
     <div className="min-h-screen bg-brand-bg">
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-brand-lime/[0.03] rounded-full blur-3xl" />
@@ -122,6 +125,7 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
             {filteredProducts.map(p => (
               <ProductCard key={p.id} product={p} isNew={newIds.includes(p.id)}
+                onView={prod => setModal({ mode: 'view', product: prod })}
                 onEdit={prod => setModal({ mode: 'edit', product: prod })}
                 onDelete={setDeleteTarget} />
             ))}
@@ -129,9 +133,20 @@ export default function Dashboard() {
         )}
       </div>
 
-      {modal && <ProductModal product={modal.product} onClose={() => setModal(null)} />}
+      {modal?.mode === 'view' && (
+        <ProductDetailsModal
+          product={modal.product}
+          onClose={() => setModal(null)}
+          onEdit={prod => setModal({ mode: 'edit', product: prod })}
+        />
+      )}
+      {modal && modal.mode !== 'view' && (
+        <ProductModal product={modal.product} onClose={() => setModal(null)} />
+      )}
       {deleteTarget && <ConfirmDelete product={deleteTarget} onClose={() => setDeleteTarget(null)} />}
       <Toast />
     </div>
+    <Footer />
+    </>
   );
 }
