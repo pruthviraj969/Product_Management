@@ -57,9 +57,9 @@ export default function Dashboard() {
             <h1 className="font-display text-5xl md:text-6xl tracking-[0.06em] leading-none">
               PRODUCT<span className="text-brand-lime">HUB</span>
             </h1>
-            <p className="font-mono text-[11px] text-brand-muted mt-1.5 tracking-[0.2em]">
+            {/* <p className="font-mono text-[11px] text-brand-muted mt-1.5 tracking-[0.2em]">
               // MANAGEMENT DASHBOARD — REDUX TOOLKIT + TAILWIND CSS
-            </p>
+            </p> */}
           </div>
           <button onClick={() => setModal({ mode: 'add', product: null })}
             className="btn-lime px-6 py-3 text-xl flex-shrink-0">
